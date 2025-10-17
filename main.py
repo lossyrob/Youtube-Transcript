@@ -1,7 +1,6 @@
-import os
 from pathlib import Path
 from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api._errors import TranscriptsDisabled, VideoUnavailable
+from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -30,9 +29,9 @@ def fetch_video_title_from_web(video_id):
         response = requests.get(url)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
-            title = soup.title.string
-            if title:
-                return title.replace(" - YouTube", "").strip()
+            title_tag = soup.find('title')
+            if title_tag and title_tag.string:
+                return title_tag.string.replace(" - YouTube", "").strip()
         return video_id  # Fallback to video ID if title cannot be fetched
     except Exception as e:
         print(f"[ERROR] Could not fetch video title for video ID {video_id} via web scraping: {e}")
@@ -41,8 +40,22 @@ def fetch_video_title_from_web(video_id):
 def fetch_available_languages(video_id):
     """Fetch available transcript languages for a video."""
     try:
-        transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-        available_languages = {transcript.language_code: transcript.language for transcript in transcript_list}
+        api = YouTubeTranscriptApi()
+        transcript_list = api.list(video_id)
+        available_languages = {}
+        
+        # Parse the string representation to extract language codes and names
+        transcript_str = str(transcript_list)
+        lines = transcript_str.split('\n')
+        
+        for line in lines:
+            # Match lines like: - en ("English (auto-generated)")
+            match = re.search(r'-\s+(\S+)\s+\("([^"]+)"\)', line)
+            if match:
+                code = match.group(1)
+                name = match.group(2)
+                available_languages[code] = name
+        
         return available_languages
     except Exception as e:
         print(f"[ERROR] Could not fetch available languages for video ID {video_id}: {e}")
@@ -51,16 +64,23 @@ def fetch_available_languages(video_id):
 def download_transcript(video_id, languages):
     """Download the transcript for a given video ID in the specified language."""
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=languages)
-        # Remove unwanted text like [Applause], [Music], etc.
-        for entry in transcript:
-            entry['text'] = re.sub(r'\[.*?\]', '', entry['text']).strip()
+        api = YouTubeTranscriptApi()
+        fetched_transcript = api.fetch(video_id, languages)
+        
+        # Convert FetchedTranscript to list of dicts
+        transcript = []
+        for snippet in fetched_transcript:
+            # Remove unwanted text like [Applause], [Music], etc.
+            cleaned_text = re.sub(r'\[.*?\]', '', snippet.text).strip()
+            if cleaned_text:  # Only add if there's text after cleaning
+                transcript.append({'text': cleaned_text})
+        
         return transcript
     except TranscriptsDisabled:
         print(f"[ERROR] Transcripts are disabled for video ID: {video_id}")
         return None
-    except VideoUnavailable:
-        print(f"[ERROR] Video unavailable for video ID: {video_id}")
+    except NoTranscriptFound:
+        print(f"[ERROR] No transcript found for video ID: {video_id}")
         return None
     except Exception as e:
         print(f"[ERROR] An error occurred while fetching the transcript: {e}")
