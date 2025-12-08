@@ -18,20 +18,20 @@ This index tracks all summarized talks for cross-referencing during the phased s
 | 03 | Michele Catasta | Replit | Build "Waymo-style" autonomy for non-technical users via verification, sub-agents, and context management |
 | 04 | Lisa Orr | Zapier | Support teams + AI codegen = faster bug fixes; 40% of app fixes now AI-generated, doubled velocity |
 | 05 | Steve Yegge & Gene Kim | Authors | Vibe coding reshapes orgs 100x more than DevOps; trust grows with usage; leaders bypassing teams |
-| 06 | Bill Chen & Brian Fioca | OpenAI | [Pending] |
-| 08 | McKinsey Team | McKinsey | [Pending] |
-| 09 | Yegor Denisov-Blanch | Stanford | [Pending] |
-| 10 | Itamar Friedman | CodiumAI | [Pending] |
-| 11 | Olive Song | MiniMax | [Pending] |
-| 12 | Kat Korevec | Google Labs | [Pending] |
-| 13 | Asaf Bord | Northwestern Mutual | [Pending] |
-| 14 | Lei Zhang | Bloomberg | [Pending] |
-| 15 | Samir Mody | Browser Company | [Pending] |
-| 16 | Max Kanat-Alexander | Capital One | [Pending] |
-| 17 | NLW | AI Daily Brief | [Pending] |
-| 18 | Arman Hezarkhani | Catalyst | [Pending] |
-| 19 | Justin Reock | DX | [Pending] |
-| 20 | Dan Shipper | Every | [Pending] |
+| 06 | Bill Chen & Brian Fioca | OpenAI | Harness is the hard part; use Codex SDK as abstraction layer; models have habits from training |
+| 07 | Martin & Natasha | McKinsey | 5-15% enterprise gains vs 10x individual; rewire to AI-native workflows + one-pizza pods |
+| 08 | Yegor Denisov-Blanch | Stanford | Median 10% AI gains; codebase cleanliness predicts success; PR counts mislead ROI |
+| 09 | Itamar Friedman | Qodo/CodiumAI | 3x code output = 3x bugs; invest in agentic quality workflows to break glass ceiling |
+| 10 | Olive Song | MiniMax | 10B param M2 model excels at long-horizon agentic tasks via interleaved thinking + perturbation training |
+| 11 | Kat Korevec | Google Labs | Proactive agents reduce mental load; Jules offers 3 levels of proactivity with December memory/critic features |
+| 12 | Asaf Bord | Northwestern Mutual | Incremental GenBI delivery with 4-agent architecture; RAG-first approach automated 80% of report-finding work |
+| 13 | Lei Zhang | Bloomberg | Paved path infrastructure + targeting unglamorous work (patches, incidents) drives AI adoption for 9K engineers |
+| 14 | Samir Mody | Browser Company | AI-native products require company-wide transformation; model behavior is a craft; UX-based prompt injection defense |
+| 15 | Max Kanat-Alexander | Capital One | "What's good for humans is good for AI"—invest in standard tools, testability, fast CI, and scalable code review |
+| 16 | NLW | AI Daily Brief/Super Intelligent | 82% positive ROI in 2,500+ use cases; systematic adopters outperform; agents jumped 11%→42% in enterprises |
+| 17 | Arman Hezarkhani | 10x | Pay engineers per story point like salespeople; incentive restructuring unlocks AI tool mastery |
+| 18 | Justin Reock | DX | Company variance dwarfs averages; psychological safety + measurement + SDLC integration enable AI gains |
+| 19 | Dan Shipper | Every | 100% AI adoption unlocks "compounding engineering"—codify knowledge into prompts for exponential leverage |
 
 ## Day 2 Talks
 
@@ -64,4 +64,4 @@ After summarizing talk #X:
 
 ---
 
-*Last updated: Talk #05 completed*
+*Last updated: Talk #19 completed (Day 1 complete)*
