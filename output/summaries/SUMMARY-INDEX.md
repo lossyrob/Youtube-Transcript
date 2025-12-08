@@ -40,18 +40,19 @@ This index tracks all summarized talks for cross-referencing during the phased s
 | 01 | Jed Borovik | Google/Jules | AI coding is "the most important problem" in applied AI—Day 2 focuses on patterns, systems, products |
 | 02 | swyx | Latent Space | Taste fights slop; AI amplifies both quality and junk—demand accountability, not just autonomy |
 | 03 | Barry Zhang & Mahesh Murag | Anthropic | Stop building agents, start building skills—folders packaging procedural knowledge extend general agents |
-| 24 | Dex Horthy | Human Layer | [Pending] |
-| 25 | Lee Robinson | Cursor | [Pending] |
-| 26 | Naman Jain | Cursor | [Pending] |
-| 27 | Applied Team | Applied | [Pending] |
-| 28 | Will Brown | Prime Intellect | [Pending] |
-| 29 | Kitze | - | [Pending] |
-| 30 | Eno Reyes | Factory | [Pending] |
-| 31 | Beyang Liu | Sourcegraph | [Pending] |
-| 32 | Jake Nations | Netflix | [Pending] |
-| 33 | Jason Warner | Poolside | [Pending] |
-| 34 | Aparna Dhinakaran | Arize | [Pending] |
-| 35 | Closing Remarks | AIE | [Pending] |
+| 04 | Dex Horthy | Human Layer | Context engineering via "research plan implement"—compress truth and intent to stay in smart zone |
+| 05 | Lee Robinson | Cursor | Cursor Composer: 4x efficient agent model trained via RL on production environment—solves "airplane Wi-Fi" problem |
+| 06 | Naman Jain | Cursor | Dynamic evals combat contamination; frontier models reward-hack 30% of tasks—need LLM judges for quality |
+| 08 | Rhythm Garg & Lyndon | Applied Compute | Async RL with staleness management achieves 60% speedup—simulation frameworks optimize GPU allocation |
+| 09 | Will Brown | Prime Intellect | Environments are entry point to AI research—harness + tasks + rewards unlocks evals, RL, and model customization |
+| 11 | Kitze | Sizzy | Vibe engineering (skilled + agents) beats vibe coding—Composer One's speed enables steering, not blind acceptance |
+| 12 | Eno Reyes | Factory | Validation infrastructure (not tool selection) is the 5-7x multiplier—invest in agent-ready codebases |
+| 13 | Beyang Liu | Sourcegraph/Amp | Sub-agent architecture beats model selectors—specialized Finder/Oracle/Kraken extend context and capabilities |
+| 15 | Jake Nations | Netflix | Easy ≠ simple; AI is "ultimate easy button"—must earn understanding before AI can help; do first migration by hand |
+| 16 | Jason Warner & Iso | Poolside | Vertical integration from data center to model; RL + LLMs bet validated; public release early next year |
+| 17 | Aparna Dhinakaran | Arize | Prompt learning beats RL for sample efficiency—150 examples, +15% Cline improvement via system prompt iteration |
+| 18 | Nick Pash | Cline | [No transcript available] |
+| 21 | Ben & swyx | Closing | World's Fair 2026 at Moscone West; AI Engineer expanding to London, Miami, Melbourne, Paris |
 
 ---
 

@@ -381,18 +381,48 @@ Generate a conference-level analysis document that synthesizes insights from all
 
 ## Cross-Phase Execution Guide
 
+### Fragmented Transcript Handling
+
+**IMPORTANT**: The transcript files were generated from YouTube timestamps that may not align with actual talk boundaries. Files may:
+- Contain content from multiple speakers (e.g., intro + first talk)
+- Be split mid-talk across multiple files
+- Start or end mid-sentence
+
+**When encountering fragmented transcripts:**
+1. Check adjacent files (before and after) for content continuity
+2. Look for speaker introduction patterns: "please welcome...", "joining me...", etc.
+3. Look for talk ending patterns: "thank you", applause, introduction of next speaker
+4. Combine relevant portions from multiple files to assemble the complete talk
+5. Document which files were combined in the summary (e.g., "Source: files 00, 01, 02")
+
+**Known fragmentation issues discovered:**
+- Files 00, 01, 02 in Day 1: Opening Performance + Alex Lieberman intro runs into Katelyn Lesse's full talk, which spans all three files
+- File boundaries often split mid-sentence - watch for this pattern throughout
+
 ### Context Clearing Protocol
+
+**CRITICAL: After completing EACH talk summary, the agent MUST use `paw_call_agent` to hand off to itself for the next talk.** This ensures automatic context clearing between talks.
 
 **Between each talk summarization sub-phase:**
 1. Complete current summary and save to `output/summaries/`
 2. Update the summary index with new one-liner
-3. Start NEW conversation/session (critical for context clearing)
-4. In new session, provide ONLY:
+3. **Call `paw_call_agent` with:**
+   - `target_agent`: "PAW-03A Implementer"
+   - `work_id`: "phased-conference-summarization"
+   - `inline_instruction`: "Process Talk #[N+1]: [filename]. Read transcript, generate summary following talk-summary.prompt.md template, save to output/summaries/, update SUMMARY-INDEX.md."
+4. The new agent session starts fresh with cleared context and receives ONLY:
    - The talk-summary prompt template
    - The single transcript file
    - The current summary index (for cross-references)
 
-**Rationale**: This prevents context window exhaustion across 35 talks (~18,000 lines of transcripts). Each summarization task should use <50% of context window.
+**Rationale**: This prevents context window exhaustion across 35 talks (~18,000 lines of transcripts). Each summarization task should use <50% of context window. The `paw_call_agent` handoff creates a new chat session automatically.
+
+**Talk Processing Sequence:**
+After Talk #1 → handoff with: "Process Talk #2: 01-Opening-Remarks-Alex-Lieberman.txt"
+After Talk #2 → handoff with: "Process Talk #3: 02-Katelyn-Lesse-Anthropic-Agentic-Systems.txt"
+... and so on through Talk #35
+
+**Final Talk (#35)**: After completing the closing remarks summary, hand off with: "Phase 2 complete. Proceed to Phase 3: Meta-Synthesis."
 
 ### Handoff Mechanism
 
@@ -425,20 +455,20 @@ mkdir -p output/summaries
 # Create prompt templates as specified
 ```
 
-**Phase 2** (repeat 35 times with context clearing):
+**Phase 2** (automated via paw_call_agent chain):
 ```
-[New conversation]
-Read: .paw/work/phased-conference-summarization/prompts/talk-summary.prompt.md
-Read: output/AIE CODE 2025 DAY [1|2]/[filename].txt
-Read: output/summaries/SUMMARY-INDEX.md
-Generate summary following template
-Save to: output/summaries/d[1|2]-[XX]-[speaker]-summary.md
-Update: output/summaries/SUMMARY-INDEX.md
+For each talk (1-35):
+1. Read talk-summary.prompt.md template
+2. Read transcript file: output/AIE CODE 2025 DAY [1|2]/[filename].txt
+3. Read current SUMMARY-INDEX.md for cross-references
+4. Generate summary following template
+5. Save to: output/summaries/d[1|2]-[XX]-[speaker]-summary.md
+6. Update: output/summaries/SUMMARY-INDEX.md with one-liner
+7. Call paw_call_agent to hand off to next talk (auto context clear)
 ```
 
-**Phase 3** (final synthesis):
+**Phase 3** (final synthesis - triggered after Talk #35):
 ```
-[New conversation]
 Read: .paw/work/phased-conference-summarization/prompts/meta-synthesis.prompt.md
 Read: All 35 summary files from output/summaries/
 Generate meta-synthesis
