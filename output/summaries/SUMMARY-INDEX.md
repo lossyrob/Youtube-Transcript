@@ -38,8 +38,8 @@ This index tracks all summarized talks for cross-referencing during the phased s
 | # | Speaker | Company | One-Line Thesis |
 |---|---------|---------|-----------------|
 | 01 | Jed Borovik | Google/Jules | AI coding is "the most important problem" in applied AI—Day 2 focuses on patterns, systems, products |
-| 02 | swyx | Latent Space | [Pending] |
-| 23 | Barry Zhang & Mahesh Murag | Anthropic | [Pending] |
+| 02 | swyx | Latent Space | Taste fights slop; AI amplifies both quality and junk—demand accountability, not just autonomy |
+| 03 | Barry Zhang & Mahesh Murag | Anthropic | Stop building agents, start building skills—folders packaging procedural knowledge extend general agents |
 | 24 | Dex Horthy | Human Layer | [Pending] |
 | 25 | Lee Robinson | Cursor | [Pending] |
 | 26 | Naman Jain | Cursor | [Pending] |
@@ -64,4 +64,4 @@ After summarizing talk #X:
 
 ---
 
-*Last updated: Talk #01 (Day 2) completed*
+*Last updated: Talk #03 (Day 2) completed*
