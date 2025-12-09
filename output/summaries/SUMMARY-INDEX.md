@@ -51,7 +51,12 @@ This index tracks all summarized talks for cross-referencing during the phased s
 | 15 | Jake Nations | Netflix | Easy ≠ simple; AI is "ultimate easy button"—must earn understanding before AI can help; do first migration by hand |
 | 16 | Jason Warner & Iso | Poolside | Vertical integration from data center to model; RL + LLMs bet validated; public release early next year |
 | 17 | Aparna Dhinakaran | Arize | Prompt learning beats RL for sample efficiency—150 examples, +15% Cline improvement via system prompt iteration |
-| 18 | Nick Pash | Cline | [No transcript available] |
+| 07 | Jacob Kahn | Meta | [Pending - transcript now available] |
+| 10 | Will Hang & Cathy Zhou | OpenAI | [Pending - transcript now available] |
+| 14 | Natalie Serrino | Gimlet Labs | [Pending - transcript now available] |
+| 18 | Nik Pash | Cline | [Pending - transcript now available] |
+| 19 | Joel Becker | Meta/METR | [Pending - transcript now available] |
+| 20 | Kevin Hou | Google DeepMind | [Pending - transcript now available] |
 | 21 | Ben & swyx | Closing | World's Fair 2026 at Moscone West; AI Engineer expanding to London, Miami, Melbourne, Paris |
 
 ---

@@ -63,9 +63,46 @@ The system uses a **phased prompt-driven architecture** where each phase is a se
 
 ## Phase Summary
 
-1. **Phase 1: Prompt Engineering** - Create the summary and synthesis prompt templates
-2. **Phase 2: Talk Summarization (35 sub-phases)** - Execute one summary per talk with context clearing
-3. **Phase 3: Meta-Synthesis** - Generate conference-level analysis from all summaries
+1. **Phase 1: Prompt Engineering** - Create the summary and synthesis prompt templates ✅ COMPLETE
+2. **Phase 2: Talk Summarization (35 sub-phases)** - Execute one summary per talk with context clearing 🔄 IN PROGRESS
+3. **Phase 3: Meta-Synthesis** - Generate conference-level analysis from all summaries ⏳ PENDING
+
+---
+
+## Current Progress Status (Updated Dec 8, 2025)
+
+### Completed Summaries (34 of 41 talks)
+
+**Day 1 (19 of 20 completed):**
+- ✅ 00 - Opening Performance + Alex Lieberman
+- ❌ 01 - Alex Lieberman Opening Remarks (separate file, needs summary)
+- ✅ 02-19 - All remaining Day 1 talks
+
+**Day 2 (15 of 21 completed):**
+- ✅ 01-06 - Borovik, swyx, Anthropic, Horthy, Robinson, Jain
+- ❌ 07 - Jacob Kahn (Meta) - Code World Models (NEW transcript)
+- ✅ 08-09 - Applied Compute, Will Brown
+- ❌ 10 - OpenAI Will Hang & Cathy Zhou - AgentRFT (NEW transcript)
+- ✅ 11-13 - Kitze, Eno Reyes, Beyang Liu
+- ❌ 14 - Natalie Serrino (Gimlet Labs) - PyTorch Kernels (NEW transcript)
+- ✅ 15-17 - Jake Nations, Jason Warner, Aparna Dhinakaran
+- ❌ 18 - Nik Pash (Cline) - ClineBench (NEW transcript)
+- ❌ 19 - Joel Becker (Meta/METR) - Agents vs Developers (NEW transcript)
+- ❌ 20 - Kevin Hou (Google DeepMind) - Project Anti-Gravity (NEW transcript)
+- ✅ 21 - Closing Remarks
+
+### Remaining Work (7 talks + Meta-Synthesis)
+
+| Priority | Day | # | File | Speaker | Topic |
+|----------|-----|---|------|---------|-------|
+| 1 | 2 | 07 | `07-Jacob-Kahn-Meta-Code-World-Models.txt` | Jacob Kahn | Meta Code World Models |
+| 2 | 2 | 10 | `10-OpenAI-Will-Hang-Cathy-Zhou-AgentRFT.txt` | Will Hang & Cathy Zhou | OpenAI AgentRFT |
+| 3 | 2 | 14 | `14-Natalie-Serrino-Gimlet-Labs-PyTorch-Kernels.txt` | Natalie Serrino | PyTorch Kernels |
+| 4 | 2 | 18 | `18-Nik-Pash-Cline-ClineBench.txt` | Nik Pash | Cline & ClineBench |
+| 5 | 2 | 19 | `19-Joel-Becker-Meta-METR-Agents-vs-Developers.txt` | Joel Becker | METR Agents vs Developers |
+| 6 | 2 | 20 | `20-Kevin-Hou-Google-DeepMind-Project-Anti-Gravity.txt` | Kevin Hou | Project Anti-Gravity |
+| 7 | 1 | 01 | `01-Opening-Remarks-Alex-Lieberman.txt` | Alex Lieberman | Opening Remarks (if substantive) |
+| 8 | - | - | Meta-Synthesis | - | Conference-level analysis |
 
 ---
 
