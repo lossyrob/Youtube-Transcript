@@ -690,13 +690,37 @@ N. **[Current Terse Headline]**: [Current 1-2 sentence summary]
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] Each insight now has 3x the previous content
-- [ ] Each insight cites at least 2 talks
+- [x] Each insight now has 3x the previous content
+- [x] Each insight cites at least 2 talks
 
 #### Manual Verification:
 - [ ] Terse headline preserved as first line
 - [ ] Supporting evidence adds depth without bloat
 - [ ] Practical implications clear
+
+### Phase 7 Completion Notes (December 9, 2025)
+
+All 10 insights expanded with the following pattern for each:
+1. **Preserved terse headline** - original format maintained as first line
+2. **Evidence from talks** - 2-5 talk citations with specific quotes, data points, and supporting details
+3. **What this means in practice** - practical implications for readers
+4. **Related insights** - cross-references to other insights in the list
+
+Key expansions per insight:
+- **#1 Context Engineering**: Added Horthy's 35K lines/7 hours achievement, progressive disclosure details, 39% SWE-bench improvement
+- **#2 Productivity Paradox**: Added death valley at 10M tokens, typing-limited vs thinking-limited explanation for expert slowdown
+- **#3 Verification Bottleneck**: Added 95-99% reliability threshold from METR, explained painted doors, reward hacking, and hardware-in-the-loop verification
+- **#4 Sub-Agents**: Added doom loop vs context exhaustion dilemma, Amp's specialized sub-agents (Finder, Oracle, Librarian, Kraken)
+- **#5 100% Adoption**: Added second-order effects (cross-product commits, day-one productivity), compounding engineering loop
+- **#6 Skills**: Added Mahesh/Barry tax professional analogy, Fortune 100 enterprise usage, non-technical skill builders
+- **#7 Code Quality**: Added R² correlations (0.40 cleanliness vs 0.20 token usage), vicious/virtuous cycle patterns
+- **#8 Fast + Smart**: Added semi-async valley of death concept, tiered model approaches (smart for planning, fast for execution)
+- **#9 Org Change**: Added psychological safety as #1 predictor, 2-person team recommendations, 100x bigger than DevOps quote
+- **#10 War on Slop**: Added Game of Thrones slop example, taste amplifiers concept, autonomy without accountability warning
+
+Total expansion: 116 lines added to Top 10 Insights section (from ~25 lines to ~140 lines)
+
+Changes committed to `feature/phased-conference-summarization` branch.
 
 ---
 
