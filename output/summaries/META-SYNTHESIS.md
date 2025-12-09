@@ -239,6 +239,110 @@ Based on the conference content, expect:
 
 ---
 
+## 🔬 Special Topic: Skills vs Sub-Agents — Clarifying the Emerging Architecture
+
+One of the most significant architectural discussions at AIE CODE 2025 centered on how to extend agent capabilities: through **skills** (Anthropic's paradigm) or through **sub-agents** (the Amp/Horthy pattern). While no speaker explicitly compared these patterns, careful analysis of three key talks reveals they are **complementary mechanisms solving different problems**, not competing alternatives.
+
+### Definitions from the Conference
+
+**Skills (Anthropic - Talk D2-03)**
+Barry Zhang and Mahesh Murag defined skills as "organized collections of files that package composable procedural knowledge for agents." Key characteristics:
+- **Static content, not runtime execution**: Skills are folders containing instructions, scripts, and documentation
+- **Progressively disclosed**: Only metadata shown initially; full content loaded on-demand to protect context windows
+- **Created by anyone**: Simple enough for non-technical users in finance, legal, and HR to build
+- **Persistent across sessions**: Skills encode institutional knowledge that transfers between conversations
+- **Versionable and shareable**: Can be stored in Git, shared across teams, published to ecosystems
+
+The critical insight: skills execute *within* the main agent's context, not as separate processes. When Claude "uses" a skill, it reads the skill's content into its current context window—there's no fork, no separate agent loop.
+
+**Sub-Agents (Amp - Talk D2-13, Horthy - Talk D2-04)**
+Beyang Liu defined sub-agents as "the analog to subroutine calls in regular programming languages." Dex Horthy was more blunt: "Sub-agents are not for anthropomorphizing roles. They are for controlling context."
+
+Key characteristics:
+- **Runtime execution in separate context**: Sub-agents fork into their own context windows
+- **Return compressed results**: After completing their task, they return only relevant findings to the parent
+- **Specialized capabilities**: Amp's sub-agents include Finder (code search), Oracle (deep reasoning), Librarian (external docs), and Kraken (large-scale refactors)
+- **Context conservation**: The primary purpose is extending effective context by isolating exploratory work
+- **Ephemeral**: Sub-agents exist only for the duration of a specific task
+
+The critical insight: sub-agents are *active runtime processes* with their own context management, not static knowledge containers.
+
+### The Relationship: Complementary, Not Competing
+
+| Dimension | Skills | Sub-Agents |
+|-----------|--------|------------|
+| **Nature** | Static procedural knowledge | Active runtime processes |
+| **Context behavior** | Loaded INTO current context | Fork SEPARATE context |
+| **Persistence** | Permanent, versioned | Ephemeral, task-scoped |
+| **Purpose** | Encode domain expertise | Manage context exhaustion |
+| **Creation** | Human-authored (or AI-assisted) | Architecturally defined |
+| **Trigger** | Agent decides to "use" a skill | Agent decides to delegate a subtask |
+
+**How they work together**: An agent might use a **skill** (loaded into context) to understand how to approach a task, then spawn a **sub-agent** (separate context) to do exploratory research, which returns compressed findings back to the main agent still operating with the skill's guidance.
+
+Anthropic explicitly described this layering: "MCP provides connectivity; skills provide expertise." Sub-agents add a third layer: sub-agents provide context isolation for compute-intensive exploration.
+
+### Where Does Research-Plan-Implement Fit?
+
+Dex Horthy's RPI workflow is **neither a skill nor a sub-agent pattern**—it's a **methodology** for intentional context compaction:
+
+1. **Research phase**: Can use sub-agents to explore codebase, returning compressed findings
+2. **Planning phase**: Creates a compressed artifact (the plan) that captures intent
+3. **Implementation phase**: Starts with clean context, loading only the plan
+
+RPI *could* be encoded as a skill (a folder with research prompts, planning templates, and implementation guidelines), and its research phase *could* use sub-agents for exploration. It's a workflow that orchestrates these mechanisms.
+
+### When to Use Each Pattern
+
+**Use Skills when:**
+- Encoding domain expertise that persists across sessions (tax procedures, coding standards, API patterns)
+- Packaging reusable procedural knowledge for multiple tasks
+- Enabling non-technical users to extend agent capabilities
+- Building an organizational knowledge base that compounds over time
+- The knowledge is "how to approach" something rather than "how to discover" something
+
+**Use Sub-Agents when:**
+- Performing exploratory work that would exhaust the main context (searching large codebases)
+- Needing deep reasoning on a subtask without polluting main context
+- The work involves significant tool use that generates verbose output
+- You want to preserve main agent "trajectory" (Horthy: avoid "yelled at agent" patterns in context)
+- The results can be meaningfully compressed before returning to parent
+
+**Use Both when:**
+- A skill defines *how* to approach a class of problems, and sub-agents handle the *exploration* within that approach
+- Building agentic systems that need both persistent expertise AND runtime context management
+
+### Conference Consensus (and Gaps)
+
+**Where speakers agreed:**
+- Context management is the core challenge (all three talks)
+- Neither skills nor sub-agents are about "role-playing" (frontend agent, QA agent)—both are about capability and context
+- Simple mechanisms (folders, subroutine-like isolation) beat complex frameworks
+
+**What was NOT addressed:**
+- No speaker explicitly compared skills to sub-agents (different talks, different contexts)
+- How skills and sub-agents compose in a unified architecture remains implicit
+- Whether sub-agents should have access to parent's skills, or maintain their own skill context
+- Performance and latency tradeoffs of sub-agent spawning vs. skill loading
+
+### Practical Guidance for Agentic System Builders
+
+1. **Start with skills for domain knowledge**: Before building complex sub-agent architectures, encode your team's expertise as skills. This knowledge persists and compounds.
+
+2. **Add sub-agents for context isolation**: When you see agents hitting context limits or generating verbose exploration output, introduce sub-agents that return compressed findings.
+
+3. **Don't anthropomorphize either mechanism**: Skills aren't "experts" and sub-agents aren't "team members." Skills are knowledge containers; sub-agents are context management primitives.
+
+4. **Version your skills like code**: Anthropic emphasized skills should be treated "like software"—tested, versioned, and maintained as codebases evolve.
+
+5. **Design sub-agents for specific feedback loops**: Per Amp's architecture, each sub-agent should have a refined tool set optimized for its specific task (Finder for search, Oracle for reasoning).
+
+6. **Use RPI as your workflow orchestration**: Research-Plan-Implement provides the phase boundaries where you make intentional decisions about which skills to load and when to spawn sub-agents.
+
+**Supporting Talks**: D2-03 (Anthropic - Skills Not Agents), D2-04 (Dex Horthy - Context Engineering), D2-13 (Beyang Liu - Amp Architecture)
+
+---
+
 ## 🎬 Must-Watch Recommendations
 
 ### The Essential 5 (If You Only Watch Five Talks)
