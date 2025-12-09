@@ -588,13 +588,44 @@ Deep dive into talks discussing organizational structure changes for AI-augmente
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] Theme 3 expanded with new content
-- [ ] New citations from D1-05 (Yegge/Kim) added
+- [x] Theme 3 expanded with new content
+- [x] New citations from D1-05 (Yegge/Kim) added
 
 #### Manual Verification:
-- [ ] Answers: "How should I restructure my team for AI development?"
-- [ ] Specific, actionable team size and structure recommendations
-- [ ] Leadership guidance included
+- [x] Answers: "How should I restructure my team for AI development?"
+- [x] Specific, actionable team size and structure recommendations
+- [x] Leadership guidance included
+
+### Phase 6 Completion Notes (December 9, 2025)
+
+**Research conducted** on four key transcripts:
+- D1-05 (Yegge/Kim): 2-person teams (developer + domain expert), one engineer per repo due to merge conflicts, leaders must vibe-code, shift "100x bigger than DevOps"
+- D1-07 (McKinsey): One-pizza pods (3-5 people), two-pizza teams are dead, 70% haven't changed roles, 5-6x delivery gains for top performers
+- D1-13 (Bloomberg/Lei Zhang): New hire training is most effective adoption mechanism, guild/champ programs, leadership lags IC adoption, paved path infrastructure
+- D2-19 (METR/Joel Becker): Expert developers slowed 19% with AI tools, reliability needs 95-99% for tab-autocomplete to save time
+
+**Changes made:**
+
+1. **Expanded Theme 3** (Organizational Transformation Barriers):
+   - Added Yegge/Kim 2-person team and one-engineer-per-repo recommendations
+   - Added team size shift from 8-10 to 3-5 person pods
+   - Added quote about AI shift being "100x bigger than DevOps"
+   - Added D1-05 (Yegge/Kim) and D2-19 (METR) as supporting talks
+   - Expanded internal tensions to account for METR's expert developer slowdown
+
+2. **Added new Special Topic section** "Organizational Structures for AI-Native Development" (178 lines):
+   - Core problem: 70% haven't changed roles despite AI tool adoption
+   - McKinsey model: One-pizza pods (3-5 people) with consolidated "Product Builder" roles
+   - Yegge/Kim model: 2-person teams, one engineer per repo, leaders must code
+   - Bloomberg adoption strategies: new hire training, guilds, leadership workshops, paved path infrastructure
+   - METR expertise paradox: why expert developers get slower (19%)
+   - Role evolution table (Traditional Role → AI-Native Role with key changes)
+   - Measurement framework: inputs, outputs, quality outputs, business outcomes
+   - Actionable 4-phase playbook for team restructuring
+   - Warning signs of failing transformation
+   - Controversial proposals (story-point compensation, one engineer per repo, dissolve specialists)
+
+Changes committed to `feature/phased-conference-summarization` branch.
 
 ---
 
