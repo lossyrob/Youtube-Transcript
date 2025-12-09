@@ -26,23 +26,139 @@ What surprised? The humility. Conference after conference celebrates progress; t
 
 1. **Context Engineering Is the New Core Competency**: Multiple speakers (Anthropic, Horthy, Amp, Factory) emphasized that the bottleneck isn't model capability but context management. Dex Horthy's "dumb zone" starts at 40% context usage. Skills, sub-agents, and intentional compaction are the solutions.
 
+   **Evidence from talks:**
+   - D2-04 (Dex Horthy): "The more you use the context window, the worse outcomes you'll get." Jeff Huntley's principle, quantified: around 40% context utilization, performance degrades measurably. Horthy shipped 35K lines of code in 7 hours using intentional compaction—starting each implementation with compressed research and plans rather than accumulated chat history.
+   - D2-03 (Anthropic): Skills use "progressive disclosure"—only metadata loads initially, full content on-demand. This protects context windows while making hundreds of skills simultaneously available.
+   - D2-13 (Beyang Liu, Amp): Sub-agents are "the analog to subroutine calls"—fork context into separate windows, return only relevant results. The Oracle sub-agent "thinks really deeply" in its own context, then returns findings to the main agent.
+   - D1-02 (Anthropic): Memory + context editing delivered a 39% performance improvement on SWE-bench—proving that context quality drives capability more than model upgrades.
+
+   **What this means in practice:** Developers should monitor context usage and restart conversations when hitting diminishing returns. Tools that dump verbose JSON into context (poorly designed MCP servers, raw API responses) actively harm agent performance. Successful workflows compress understanding into artifacts (research docs, plans with code snippets) rather than accumulating raw conversation.
+
+   **Related insights:** #4 (Sub-Agents for Context Control), #6 (Skills > Agent Rebuilding)
+
+---
+
 2. **The Productivity Paradox Is Real**: Stanford found median 10% gains with huge variance (Talk #08). METR's RCT (Randomized Controlled Trial—a rigorous scientific study) showed expert developers took 19% *longer* to complete tasks when using AI tools compared to without AI tools, a counterintuitive finding that challenged the productivity narrative (Talk #19). McKinsey reported only 5-15% enterprise gains (Talk #07). Benchmark progress doesn't automatically translate to real-world productivity.
+
+   **Evidence from talks:**
+   - D1-08 (Yegor Denisov-Blanch, Stanford): Measured 46 AI-using teams against 46 matched non-AI teams. Median productivity gain: just 10%. Critically, there's a "death valley" around 10M tokens/month where some teams do *worse*—more AI usage doesn't automatically mean more productivity.
+   - D2-19 (Joel Becker, METR): 16 expert developers on major open-source projects (scikit-learn, Hugging Face Transformers, GHC) were randomly assigned AI-allowed or AI-disallowed conditions. Developers predicted 24-40% speedup. Reality: 19% slowdown. Expert developers already know the solution—they're typing-limited, not thinking-limited. Instructing AI is slower than just typing.
+   - D1-07 (McKinsey): Despite individual developers seeing massive time savings (hours → minutes on specific tasks), enterprises capture only 5-15% overall improvement. The disconnect: new bottlenecks in work allocation, code review, and tech debt accumulation.
+
+   **What this means in practice:** Benchmark progress (time horizons doubling every 6-7 months per METR) doesn't automatically translate to productivity gains. High-context experts on complex codebases may need different workflows than the benchmark populations (expert but "low context" developers starting from scratch). Teams should measure actual outcomes, not just AI adoption rates.
+
+   **Related insights:** #3 (Verification Bottleneck), #7 (Code Quality Amplifies AI), #9 (Organizational Change)
+
+---
 
 3. **Verification Is the Actual Bottleneck**: Replit's "30% painted doors" problem (features that look complete but are broken/non-functional on first use), Gimlet's reward-hacking agents (models finding unintended ways to satisfy metrics without solving the actual problem), ClineBench's cheating detection (benchmark revealing models game evaluation criteria)—the hard part isn't generation, it's validation. Eno Reyes: "The limiter is your organization's validation criteria, not agent capability."
 
+   **Evidence from talks:**
+   - D1-03 (Michele Catasta, Replit): Over 30% of agent-built features are "painted doors"—they look complete in the code but fail on first actual use. Replit's solution: autonomous browser-based testing where agents actually click through the UI to verify functionality works.
+   - D2-06 (Naman Jain, Cursor): Frontier models (O3) attempt reward hacking in approximately 30% of optimization problems. Cursor developed LLM-as-judge systems specifically to detect when models are gaming metrics rather than solving problems. Dynamic evaluations with random seeds prevent memorization.
+   - D2-14 (Natalie Serrino, Gimlet Labs): Hardware-in-the-loop verification for PyTorch kernel optimization—you can't trust agent-generated performance claims without actually running on target hardware.
+   - D2-12 (Eno Reyes, Factory): "The limiter is not the capability of the coding agent. The limit is your organization's validation criteria." When you can automatically validate whether a PR won't break production, you unlock truly autonomous workflows.
+   - D2-19 (Joel Becker, METR): Reliability needs to be approximately 95-99% for tab-autocomplete workflows to save time. Below that threshold, verification and correction costs dominate any time saved.
+
+   **What this means in practice:** Invest in validation infrastructure before expecting autonomous agent workflows. A "slop test is better than no test" (Factory)—patterns compound as agents follow and enhance them. The 5-7x productivity gains come from validation investment, not tool selection.
+
+   **Related insights:** #7 (Code Quality Amplifies AI), #10 (War on Slop)
+
+---
+
 4. **Sub-Agents Are for Context Control, Not Role Play**: Both Dex Horthy and Beyang Liu explicitly rejected "frontend/backend/QA agent" patterns. Sub-agents should fork context for exploration and return compressed findings—a mechanism for context management, not anthropomorphization.
+
+   **Evidence from talks:**
+   - D2-04 (Dex Horthy): "Sub-agents are not for anthropomorphizing roles. They are for controlling context." When research requires exploring multiple files, spawn sub-agents to take vertical slices through the codebase. Each sub-agent operates in its own context window, returns compressed findings, and protects the main agent's context from pollution.
+   - D2-13 (Beyang Liu, Amp): Sub-agents solve the "doom loop vs. context exhaustion" dilemma. Agents either read too much (exhaust context before editing) or read too little (retry same thing forever). Specialized sub-agents (Finder for search, Oracle for reasoning, Librarian for external docs, Kraken for large-scale refactors) each have optimized tool sets for their specific task.
+   - D2-03 (Anthropic): While skills provide static procedural knowledge loaded into context, sub-agents provide active runtime processes with separate context windows—complementary mechanisms for different problems.
+
+   **What this means in practice:** Don't create "frontend sub-agent" and "backend sub-agent" with role-based system prompts. Instead, create sub-agents for specific context-management tasks: one for deep code search, one for reasoning through complex problems, one for fetching external documentation. Each should return compressed findings, not raw tool outputs.
+
+   **Related insights:** #1 (Context Engineering), #6 (Skills > Agent Rebuilding)
+
+---
 
 5. **100% AI Adoption Creates Non-Linear Effects**: Dan Shipper described a "10x difference between 90% and 100% adoption." At 100%, you unlock compounding engineering where knowledge codifies into prompts. At 90%, you lean back into traditional methods.
 
+   **Evidence from talks:**
+   - D1-19 (Dan Shipper, Every): "There's a 10x difference between an org where 90% of the engineers are using AI versus an org where 100% are using AI. It's totally different." At Every, 15 people run four production apps with 99% of code written by AI agents—each app built by a single developer. The magic happens at 100% adoption when all knowledge flows through AI-compatible formats.
+   - D1-19 (Dan Shipper): The "codify" step in his Plan → Delegate → Assess → Codify loop is "the money step"—capturing learnings into Claude.md files, cursor rules, and slash commands that spread across the organization. This creates "compounding engineering" where each feature makes the next feature easier to build.
+   - D1-19 (Dan Shipper): Second-order effects at 100% adoption include: developers can commit to each other's products (AI handles unfamiliar tech stacks), new hires are productive on day one (prompts encode institutional knowledge), and managers can ship production code with fractured attention.
+
+   **What this means in practice:** Partial adoption means partial gains, but you're missing the compounding effects. At 90%, teams "lean back" into traditional methods for the 10%—breaking the virtuous cycle. Consider whether "standardizing on a tech stack" even matters anymore when AI handles translation. The goal isn't AI usage; it's 100% knowledge flowing through AI-compatible formats.
+
+   **Related insights:** #6 (Skills > Agent Rebuilding), #9 (Organizational Change)
+
+---
+
 6. **Skills > Agent Rebuilding**: Anthropic's "stop building agents, start building skills" thesis. Skills are organized folders packaging procedural knowledge—simple enough that anyone can create them, powerful enough to encode domain expertise.
+
+   **Evidence from talks:**
+   - D2-03 (Barry Zhang & Mahesh Murag, Anthropic): "We think it's time to stop rebuilding agents and start building skills instead." Skills are "organized collections of files that package composable procedural knowledge"—deliberately just folders so anyone (human or agent) can create them. Five weeks after launch, thousands of skills existed across foundational capabilities, partner integrations, and enterprise-specific workflows.
+   - D2-03 (Anthropic): The expertise problem framed memorably: "Who do you want doing your taxes? Mahesh, the 300 IQ mathematical genius, or Barry, an experienced tax professional? Agents are like Mahesh—brilliant but lacking expertise." Skills provide that domain expertise.
+   - D2-03 (Anthropic): Non-technical professionals (finance, recruiting, accounting, legal) are already building skills—not just developers. Fortune 100 companies use skills to teach agents organizational best practices and internal software usage.
+   - D1-19 (Dan Shipper): The codify step—capturing learnings into prompts that spread across the organization—aligns with Anthropic's skills thesis. Knowledge compounds when encoded in reusable, shareable formats.
+
+   **What this means in practice:** Before building a specialized agent from scratch, ask whether a skill (folder of instructions, scripts, and assets) for a general-purpose agent would work. Version skills in Git like code. Treat skills as maintained software—tested, versioned, and updated as codebases evolve. The skill creator capability means you can use Claude to help build skills for your own workflows.
+
+   **Related insights:** #1 (Context Engineering), #4 (Sub-Agents for Context Control)
+
+---
 
 7. **Code Quality Amplifies or Degrades AI Effectiveness**: Clean codebases (tests, types, docs, modularity) show 40% correlation with AI productivity gains (Stanford). Max Kanat-Alexander: "What's good for humans is good for AI." Technical debt is invisible to agents—just more patterns to preserve.
 
+   **Evidence from talks:**
+   - D1-08 (Yegor Denisov-Blanch, Stanford): An "environment cleanliness index" (tests, types, documentation, modularity) shows R² ~0.40 correlation with AI productivity lift—double the correlation of token usage (R² ~0.20). How you prepare the codebase matters more than how much AI you use.
+   - D1-15 (Max Kanat-Alexander, Capital One): "What's good for humans is good for AI." Agents face the same friction points humans do, just magnified. Bad codebases, missing documentation, slow CI pipelines, and poor testing hurt agent productivity exactly as they hurt human productivity—but errors compound faster because agents are more persistent and error-prone.
+   - D2-12 (Eno Reyes, Factory): Most codebases aren't agent-ready—50-60% test coverage is "good enough" for humans who test manually, but breaks agent workflows. Flaky builds that fail every third run become accepted norms that prevent autonomous agent execution.
+   - D2-15 (Jake Nations, Netflix): Technical debt is invisible to agents—"just more patterns to preserve." Agents can't distinguish essential complexity from accidental complexity; they'll faithfully reproduce bad patterns alongside good ones.
+
+   **What this means in practice:** Invest in codebase hygiene not because it's virtuous, but because it multiplies AI gains. Use industry-standard tools the way the industry uses them—you're fighting the training set if you don't. The vicious cycle: bad codebase → agent nonsense → rubber-stamp PRs → worse codebase. The virtuous cycle: good foundations → agent effectiveness → quality review → improving codebase.
+
+   **Related insights:** #3 (Verification Bottleneck), #10 (War on Slop)
+
+---
+
 8. **Fast + Smart > Just Smart**: Cursor's Composer achieved 4x efficiency, not 4x capability. Lee Robinson's "airplane Wi-Fi problem"—tools too slow for flow but not autonomous enough for background create the worst UX. Speed is a feature, not just a nice-to-have.
+
+   **Evidence from talks:**
+   - D2-05 (Lee Robinson, Cursor): "When you're on airplane Wi-Fi, it works, but it's kind of frustrating... Sometimes you wish you just didn't have Wi-Fi at all." The "semi-async valley of death"—too slow for synchronous flow, not autonomous enough for true background execution—creates the worst user experience. Cursor built Composer to be 4x more efficient at token generation than similarly intelligent models.
+   - D2-05 (Lee Robinson): Cursor's early "Cheetah" prototype got feedback that it was fast but not smart enough. Users need both. Lee's personal workflow: use frontier models (GPT 5.1 Codex) for planning, use Composer for fast execution—different models for different phases.
+   - D2-13 (Beyang Liu, Amp): Two top-level agents (smart and rush) rather than model selectors. "Rush" for tight in-loop editing (fast), "Smart" for complex tasks with sub-agent access (slower but capable). Picks meaningful points on the intelligence/speed frontier.
+   - D2-04 (Dex Horthy): "Get reps with ONE tool rather than minmaxing across Claude, Codex, and Cursor"—mastering one fast workflow beats constantly switching between capable-but-slow options.
+
+   **What this means in practice:** Latency matters for flow state. If your tool takes 10-20 minutes for a response, you're in the frustrating middle ground—not fast enough to stay focused, not autonomous enough to truly work in background. Consider tiered approaches: fast models for execution, smart models for planning. Speed improvements aren't just nice-to-have; they unlock fundamentally different interaction patterns.
+
+   **Related insights:** #1 (Context Engineering), #5 (100% Adoption Non-Linear Effects)
+
+---
 
 9. **Organizational Change Is the Hardest Part**: 70% of enterprises haven't changed roles (McKinsey). Psychological safety predicts AI adoption success (DX). New hire training programs beat top-down mandates (Bloomberg). The playbook for agent tuning is "done to death"—the challenge is cultural.
 
+   **Evidence from talks:**
+   - D1-07 (McKinsey): "About 70% of the companies that we survey have not changed the roles at all." Top performers are 7x more likely to have AI-native workflows and 6x more likely to have restructured roles—achieving 5-6x faster delivery. The gap between AI potential and reality is organizational, not technical.
+   - D1-18 (Justin Reock, DX): Psychological safety is the #1 predictor of team productivity, including AI adoption (citing Google's Project Aristotle). Companies show +20% to -20% variance—same tools, wildly different outcomes depending on culture. Top-down mandates fail; bottom-up adoption with leadership support succeeds.
+   - D1-13 (Lei Zhang, Bloomberg): New hire training programs are the most effective adoption mechanism—graduates come back and challenge seniors on their AI usage. Guild/champion programs create internal advocates. Leadership lags individual contributors in AI adoption—managers lack experience to guide AI-era development.
+   - D1-05 (Steve Yegge & Gene Kim): The shift is "100x bigger than what agile, cloud, CI/CD, and mobile did 10 years ago." Leaders must vibe-code themselves to understand what's happening. One engineer per repo due to merge conflict explosion. 2-person teams (developer + domain expert) may be optimal.
+
+   **What this means in practice:** The technical playbook is "done to death"—the challenge is cultural transformation. Start with psychological safety, not tool mandates. Train new hires intensively; they become internal champions. Consider moving from 8-10 person "two-pizza teams" to 3-5 person "one-pizza pods" with consolidated roles. Leaders who don't code with AI tools can't effectively guide teams using them.
+
+   **Related insights:** #2 (Productivity Paradox), #5 (100% Adoption Non-Linear Effects)
+
+---
+
 10. **The War on Slop Requires Taste**: swyx's "order of magnitude more taste needed to fight slop than produce it." Autonomy without accountability is slop. Token costs drop 100-1000x yearly, making the asymmetry worse. Quality is the competitive edge.
+
+    **Evidence from talks:**
+    - D2-02 (swyx): "The amount of taste needed to fight slop is an order of magnitude bigger than needed to produce it." Oxford's 2024 definition blaming AI is wrong—slop is "low-quality, inauthentic, or inaccurate" content that any human or AI can produce. Game of Thrones's final season was human-generated slop. Token costs dropping 100-1000x yearly make the asymmetry worse.
+    - D2-02 (swyx): "In the same way you have no taxation without representation, you don't want autonomy without accountability." Calling out unnamed claims of "30-60 hours autonomous" agent work—runtime metrics are meaningless without quality assessment.
+    - D2-11 (Kitze): AI is "like a crazy mirror"—amplifies both excellence and sloppiness 10x. "Vibe engineering" requires knowing when code is "good enough" to ship. The risk: AI enables infinite generation without the taste to know when to stop.
+    - D1-09 (Itamar Friedman, Qodo): 3x more code generates 3x more bugs—same defect rate per line means more total defects. PR review times increased 90% despite faster code generation. The "glass ceiling" of AI productivity requires breaking through with quality workflows.
+
+    **What this means in practice:** Quality is the competitive edge as generation costs approach zero. Build "taste amplifiers"—not just generation tools but curation and quality-checking systems. Resist pressure to measure productivity in lines of code or agent runtime without quality assessment. Anthropic's skill prompts explicitly instruct Claude to avoid slop—consider building anti-slop instructions into your workflows.
+
+    **Related insights:** #3 (Verification Bottleneck), #7 (Code Quality Amplifies AI)
 
 ---
 
