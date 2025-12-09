@@ -510,13 +510,37 @@ Research the relationship between Anthropic's "skills" pattern and sub-agent arc
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] New "Special Topic" section exists
-- [ ] Section contains transcript citations
+- [x] New "Special Topic" section exists
+- [x] Section contains transcript citations
 
 #### Manual Verification:
 - [ ] Answers the question: "Should I use skills, sub-agents, or both?"
 - [ ] Conference consensus (or tensions) clearly stated
 - [ ] Practical guidance for agentic system builders
+
+### Phase 5 Completion Notes (December 9, 2025)
+
+**Research conducted** on three key transcripts:
+- D2-03 (Anthropic Barry Zhang & Mahesh Murag): Skills defined as "organized collections of files that package composable procedural knowledge"
+- D2-04 (Dex Horthy): Sub-agents explicitly for "controlling context, not anthropomorphizing roles"
+- D2-13 (Beyang Liu, Amp): Sub-agents as "analog to subroutine calls" with Finder, Oracle, Librarian, Kraken specializations
+
+**Key research findings:**
+1. **Skills are PASSIVE** - static procedural knowledge loaded into current context on-demand
+2. **Sub-agents are ACTIVE** - runtime processes with separate context windows that return compressed results
+3. **RPI is a WORKFLOW** - methodology for intentional compaction, can orchestrate both skills and sub-agents
+4. **No speaker explicitly compared them** - but analysis reveals they are complementary, not competing
+5. **Skills encode expertise; sub-agents manage context isolation**
+
+**Changes made:**
+- Added new "Special Topic: Skills vs Sub-Agents — Clarifying the Emerging Architecture" section (104 lines)
+- Placed after Predictions & Trends, before Must-Watch Recommendations
+- Includes definitions, relationship analysis, when to use each pattern, and practical guidance
+- Cites all three key transcripts (D2-03, D2-04, D2-13)
+
+**Did NOT update Themes 1 or 4** - the Special Topic section is comprehensive and self-contained; adding redundant information to themes would create duplication. The Special Topic section cross-references themes naturally.
+
+Changes committed to `feature/phased-conference-summarization` branch.
 
 ---
 
