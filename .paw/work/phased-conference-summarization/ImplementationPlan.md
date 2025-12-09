@@ -514,9 +514,9 @@ Research the relationship between Anthropic's "skills" pattern and sub-agent arc
 - [x] Section contains transcript citations
 
 #### Manual Verification:
-- [ ] Answers the question: "Should I use skills, sub-agents, or both?"
-- [ ] Conference consensus (or tensions) clearly stated
-- [ ] Practical guidance for agentic system builders
+- [x] Answers the question: "Should I use skills, sub-agents, or both?" ✅ "When to Use Each Pattern" section
+- [x] Conference consensus (or tensions) clearly stated ✅ "Conference Consensus (and Gaps)" section
+- [x] Practical guidance for agentic system builders ✅ 6 numbered practical guidance items
 
 ### Phase 5 Completion Notes (December 9, 2025)
 
