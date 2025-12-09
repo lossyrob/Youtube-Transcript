@@ -100,14 +100,19 @@ What surprised? The humility. Conference after conference celebrates progress; t
 - Psychological safety is the #1 predictor of team productivity, including AI adoption (DX citing Google's Project Aristotle)
 - New hire training programs are the most effective adoption mechanism—graduates challenge seniors (Bloomberg)
 - Leadership lags individual contributors in AI adoption—managers lack experience to guide AI-era development (Bloomberg)
+- Team size recommendation: Move from 8-10 person "two-pizza teams" to 3-5 person "one-pizza pods" with consolidated roles (McKinsey)
+- AI velocity creates merge conflict explosion—some teams have concluded "one engineer per repo" is necessary (Yegge/Kim)
+- The shift is "100x bigger than what agile, cloud, CI/CD, and mobile did 10 years ago" (Yegge/Kim)
 
 **Supporting Talks**: 
+- Talk D1-05 (Yegge & Kim) - 2-person teams (developer + domain expert), one engineer per repo, leaders must vibe-code
 - Talk D1-07 (McKinsey) - "Two-pizza teams are dead"—need one-pizza pods with consolidated roles
 - Talk D1-18 (Justin Reock, DX) - Top-down mandates fail; companies show +20% to -20% variance
 - Talk D1-13 (Lei Zhang, Bloomberg) - "Paved path" infrastructure enabling 9,000 engineers
 - Talk D1-17 (Arman Hezarkhani, 10x) - Story-point compensation as radical incentive restructuring
+- Talk D2-19 (Joel Becker, METR) - Expert developers slowed 19% with AI—verification costs dominate
 
-**Internal Tensions**: Radical proposals (paying engineers per story point, requiring executives to vibe-code) contrast with conservative enterprise approaches (incremental delivery, exit ramps at each phase). What pace of transformation is appropriate?
+**Internal Tensions**: Radical proposals (paying engineers per story point, requiring executives to vibe-code, one engineer per repo) contrast with conservative enterprise approaches (incremental delivery, exit ramps at each phase). What pace of transformation is appropriate? METR's finding that expert developers were slowed 19% by AI tools suggests that organizational transformation must account for developer context and expertise—high-context experts may need different workflows than low-context generalists.
 
 ---
 
@@ -340,6 +345,178 @@ RPI *could* be encoded as a skill (a folder with research prompts, planning temp
 6. **Use RPI as your workflow orchestration**: Research-Plan-Implement provides the phase boundaries where you make intentional decisions about which skills to load and when to spawn sub-agents.
 
 **Supporting Talks**: D2-03 (Anthropic - Skills Not Agents), D2-04 (Dex Horthy - Context Engineering), D2-13 (Beyang Liu - Amp Architecture)
+
+---
+
+## 🏢 Special Topic: Organizational Structures for AI-Native Development
+
+The conference provided surprisingly concrete guidance on how to restructure engineering organizations for AI-augmented development. Four talks in particular—Yegge/Kim's fireside chat, McKinsey's enterprise study, Bloomberg's 9,000-engineer deployment, and METR's developer RCT—offered specific recommendations that, taken together, form an actionable playbook for organizational transformation.
+
+### The Core Problem: 70% Haven't Changed Roles
+
+McKinsey's survey of 300 enterprises revealed a stark reality: **70% have deployed AI coding tools without changing roles or workflows**. These organizations see only 5-15% productivity improvements. Meanwhile, the top performers—those 7x more likely to have "AI-native workflows"—achieve 5-6x faster delivery.
+
+The gap isn't technical. The tools work. The gap is organizational.
+
+### Specific Team Structure Recommendations
+
+#### The McKinsey Model: "One-Pizza Pods" (3-5 People)
+
+McKinsey explicitly declared "two-pizza teams are dead"—the 8-10 person agile teams that were standard for 15+ years no longer optimize for AI-augmented development. Their replacement:
+
+**One-Pizza Pods (3-5 people):**
+- **Consolidated "Product Builder" roles**: No separate frontend, backend, QA engineers—instead, full-stack fluent individuals who orchestrate agents
+- **PMs create code prototypes directly**: Rather than iterating on long PRDs, product managers iterate on specs *with agents*
+- **Workflow-organized squads**: One pod focuses on bug fixes, another on greenfield development—matching work type to optimal AI workflows
+
+**Why smaller works better:**
+- Coordination costs dominate when AI accelerates individual output
+- Agents handle what previously required specialists (testing, documentation, boilerplate)
+- Smaller pods can form more teams from same headcount, increasing parallelism
+
+#### The Yegge/Kim Model: 2-Person Teams + Repo Ownership
+
+Steve Yegge and Gene Kim went even more radical, based on case studies from their "Vibe Coding" book research:
+
+**Minimum viable team: 2 people**
+- "A developer and a domain expert"—or as Kent Beck said, "a person with a problem and a person who can solve it"
+- One Travelopia case study: Legacy application replacement in 6 weeks with "a very small team"—where previously "we would need a team of eight people"
+
+**One engineer per repo:**
+- Direct quote from the talk: "Our code velocity is so high, we've concluded that we can only have one engineer per repo—because of merge conflicts. We haven't figured out the coordination cost mechanism yet."
+- This isn't aspirational—this is what high-velocity AI-augmented teams are already discovering
+
+**Leaders must code:**
+- Cisco Security case study: SVP required 100 top leaders to "vibe code one feature into production in a quarter"
+- Dr. Top Pal (Fidelity): "Had a vision for years, team said it would take 5 months. He spent 5 days vibe coding it by himself and put it into production."
+- Gene Kim's observation: "Leaders who can code are reshaping their organizations as they realize what's possible"
+
+### The Adoption Problem: New Hires vs. Top-Down Mandates
+
+Bloomberg (Lei Zhang) and DX (Justin Reock) offered contrasting approaches that converged on the same insight: **top-down mandates don't work**.
+
+**What fails:**
+- Mandating tool usage without role changes
+- Rolling out tools without hands-on upskilling
+- Expecting behavior change without incentive alignment
+- Justin Reock's data: Companies show +20% to -20% productivity variance with same tools—culture determines outcomes
+
+**What works (Bloomberg's approach):**
+
+1. **Integrate AI into new hire training**: Bloomberg has a 20+ year training program. They incorporated AI coding into onboarding. New hires learn AI-augmented development as the default, then return to teams and challenge seniors: "Why don't we do it this way?"
+
+2. **Guild/Community Programs**: Cross-organizational communities ("champ programs") where passionate adopters share learnings. Bloomberg bootstrapped an "engineer AI productivity community" that organically deduplicates efforts and spreads best practices.
+
+3. **Leadership workshops**: Bloomberg's data showed "individual contributors have much better, stronger adoption than our leadership team." Response: leadership workshops to ensure managers can guide AI-era development.
+
+**The Bloomberg "paved path" infrastructure:**
+- Gateway for model experimentation—teams can quickly test which model works best
+- MCP directory/hub—teams discover existing MCP servers instead of rebuilding
+- Standard platform for tool deployment with quality controls
+- Principle: "Make the right thing extremely easy to do. Make the wrong thing ridiculously hard to do."
+
+### The Expertise Paradox: Why Expert Developers Get Slower
+
+METR's RCT (Joel Becker) revealed a counterintuitive finding that organizations must account for: **expert developers took 19% longer with AI tools** compared to without.
+
+**Why this happens:**
+1. **High-context developers already know the solution**: They're not exploring—they're limited by typing speed. Using AI adds instruction overhead without solving their actual bottleneck.
+2. **Low AI reliability creates verification burden**: At current reliability levels, checking and correcting AI output can exceed the time saved.
+3. **Overoptimism about AI usefulness**: Developers expected ~25% speedup, got -19%. Misaligned expectations led to suboptimal tool usage.
+
+**Organizational implications:**
+- Don't assume uniform gains across developer populations
+- High-context experts on large, mature codebases may need different workflows than generalists on greenfield work
+- Reliability threshold: ~95-99% reliability needed for tab-autocomplete workflows to actually save time
+- "Perhaps the result will have already changed by the time I'm giving this talk"—this is improving rapidly
+
+### Role Evolution: What Each Role Becomes
+
+Based on conference consensus:
+
+| Traditional Role | AI-Native Role | Key Change |
+|------------------|----------------|------------|
+| Frontend Engineer | Product Builder | Full-stack agent orchestration; specialization dissolves |
+| Backend Engineer | Product Builder | Same consolidation; agents handle boilerplate |
+| QA Engineer | Validation Engineer | Focus on verification criteria, not manual testing |
+| PM (PRD Writer) | PM (Spec + Prototype) | Create code prototypes directly; iterate specs with agents |
+| Tech Lead | Agent Architect | Design agent workflows, sub-agent patterns, context strategies |
+| Engineering Manager | Enablement Lead | Upskilling, psychological safety, measurement—not task assignment |
+
+### The Measurement Problem
+
+McKinsey found bottom performers often **weren't even measuring speed or productivity**—only 10% measured productivity. The top performers use holistic measurement:
+
+**Inputs:**
+- Investment in tools + upskilling + change management time
+
+**Direct Outputs:**
+- Adoption breadth/depth
+- Velocity/capacity increase
+- Developer NPS (are they enjoying their craft more?)
+
+**Quality Outputs:**
+- Code security and quality
+- Resiliency (e.g., mean-time-to-resolve priority bugs)
+
+**Business Outcomes:**
+- Time to revenue
+- Price differential for higher quality features
+- Cost reduction per pod
+
+### Actionable Guidance: The Team Restructuring Playbook
+
+Based on conference insights, here's a practical sequence for organizational transformation:
+
+**Phase 1: Foundation (1-2 months)**
+1. Establish measurement baseline—you can't improve what you don't measure
+2. Build "paved path" infrastructure: gateway for model access, tool directory, standard deployment platform
+3. Integrate AI tools into new hire onboarding immediately
+4. Create opt-in learning communities (guilds, champs)
+
+**Phase 2: Pilot Restructuring (2-4 months)**
+5. Select 2-3 teams for "one-pizza pod" experiments
+6. Consolidate roles: product builder replacing frontend/backend/QA split
+7. Assign PMs to prototype in code, not just write PRDs
+8. Measure: delivery speed, merge frequency, code quality, developer satisfaction
+
+**Phase 3: Workflow Redesign (3-6 months)**
+9. Move from story-driven to spec-driven development
+10. Reorganize squads by workflow type (bug fixes vs. greenfield)
+11. Implement continuous planning vs. quarterly planning
+12. Address repo ownership—consider single-owner for high-velocity work
+
+**Phase 4: Scale (6-12 months)**
+13. Roll out restructured model to remaining teams
+14. Leadership workshops—ensure managers can guide AI-era development
+15. Adjust incentive structures (consider output-based elements)
+16. Build internal skills/prompt library that compounds organizational knowledge
+
+### Warning Signs: When Transformation Is Failing
+
+Based on the conference's failure cases:
+
+- **Adoption drops off after initial spike**: You've deployed tools without changing workflows (seen at McKinsey client)
+- **Leadership lags IC adoption**: Managers can't guide what they don't understand
+- **Same roles, same ceremonies, same team sizes**: 70% of enterprises are stuck here
+- **Measuring PRs and lines of code**: These metrics are meaningless for AI-augmented work
+- **Expert developers getting slower**: You may need different workflows for high-context experts
+
+### The Controversial Proposals
+
+The conference surfaced radical ideas that may become mainstream:
+
+1. **Story-point compensation** (Arman Hezarkhani, 10x): Pay engineers based on output like salespeople. Aligns incentives with AI mastery.
+
+2. **Leaders must vibe-code features** (Yegge/Kim): Cisco's SVP required 100 leaders to ship features via vibe coding. Leaders who code reshape their organizations.
+
+3. **One engineer per repo** (Yegge/Kim case study): Merge conflicts make coordination impossible at high velocity. Single ownership eliminates coordination tax.
+
+4. **Dissolve specialist roles entirely** (McKinsey): No frontend, no backend, no QA—just "product builders" orchestrating agents.
+
+These remain tensions, not consensus. But the direction is clear: smaller teams, fewer specialized roles, more agent orchestration, and different relationships between humans and AI.
+
+**Supporting Talks**: D1-05 (Yegge & Kim), D1-07 (McKinsey), D1-13 (Bloomberg), D1-17 (10x), D1-18 (DX), D2-19 (METR)
 
 ---
 
